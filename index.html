@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Toko Susilo V2</title>
+    <script defer src="./index.js"></script>
+    <style>
+        tr,td,table, th{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        td{
+            padding: 10px;
+        }
+        form{
+            width: 50%;
+            /* margin: 0 auto; */
+        }
+    </style>
+</head>
+<body>
+    <form>
+
+        <!-- FILTER -->
+
+        <fieldset>
+            <legend>Filter</legend>
+            <p>Nama : <input type="text" id="namaFilter" oninput="filterNama()"></p>
+            <p>Harga: 
+                <input type="number" id="hargaMin" onkeyup="filterHarga()"> 
+                - 
+                <input type="number" id="hargaMax" onkeyup="filterHarga()"></p>
+            <p>Category :
+                <select name="category" id="categoryFilter" onchange="filterCategory()">
+
+                </select>
+            </p>
+        </fieldset>
+
+        <!-- INPUT DATA -->
+
+        <fieldset>
+            <legend>Input Data</legend>
+            <table>
+                <td>
+                    <input type="text" id="nama" placeholder="nama">
+                </td>
+                <td>
+                    <input type="number" id="harga" placeholder="harga">
+                </td>
+                <td>
+                    <select name="category" id="categoryInput">
+
+                    </select>
+                </td>
+                <td>
+                    <input type="number" id="stock" placeholder="stock">
+                </td>
+            </table>
+            <input type="button" value="Add Data" onclick="addData()">
+        </fieldset>
+
+        <!-- MENU -->
+
+        <fieldset>
+            <legend>Daftar Menu</legend>
+            <table>
+                <thead>
+                    <th>ID</th>
+                    <th>Nama</th>
+                    <th>Category</th>
+                    <th>Harga</th>
+                    <th>Stock</th>
+                    <th colspan="3">
+                        Action
+                    </th>
+                </thead>
+                <tbody id="output">
+
+                </tbody>
+            </table>
+        </fieldset>
+
+        <!-- CART -->
+
+        <fieldset>
+            <legend>Cart</legend>
+            <table id='cart'>
+                <thead>
+                    <th>Id</th>
+                    <th>Category</th>
+                    <th>Nama</th>
+                    <th>Harga</th>
+                    <th>Action</th>
+                </thead>
+                <tbody id="showCart">
+
+                </tbody>
+                
+            </table>
+                    <p>
+                        <input type="button" value="Payment">
+                    </p>
+        </fieldset>
+
+    </form>
+</body>
+</html>

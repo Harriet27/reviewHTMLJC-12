@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+        tr,td,table,th{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <center>
+
+        <input type="text" id="namaDepanInput">
+        <input type="text" id="namaBelakangInput">
+        <input type="button" value="Add Data" onclick="onButtonClick()"> // Add Data
+    <p id="hasil">
+        Ini inner HTML
+    </p>
+    <table>
+        <thead>
+            <tr> 
+                <th>Nama Depan</th>
+                <th>Nama Belakang</th>
+                <th colspan="2">Action</th>
+            </tr>
+        </thead>
+        <tbody id="hasilTabel">
+
+        </tbody>
+    </table>
+</center>
+</body>
+
+<script>
+
+    var bioData = [
+        {namaDepan:'Lian', namaBelakang:'Eddy'},
+        {namaDepan:'Andi', namaBelakang:'Rahman'},
+        {namaDepan:'Susilo', namaBelakang:'Bambang'},
+        {nama: 'Joko', marga: 'Joko', namaDepan: 'JokoBeneran', namaBelakang: 'Lah'}
+        
+    ]
+
+    var mapBioData = (indexData) => {
+        // indexData = 0
+        var hasilMap = bioData.map((val, index) => {
+            console.log(val, index)
+            if(indexData === index){
+                return(
+                    `
+                        <tr>
+                            <td><input type='text' value='${val.namaDepan}' id='editInputDepan'></td>
+                            <td><input type='text' value='${val.namaBelakang}' id='editInputBelakang'></td>
+                            <td>
+                                <input type='button' value='Cancel' onclick="cancelEdit()">    
+                            </td>    
+                            <td>
+                                <input type='button' value='Save' onclick="saveEdit(${index})">    
+                            </td>   
+                        </tr>
+                    `
+                )
+            }
+
+            return(
+                `
+                    <tr>
+                        <td>${val.namaDepan}</td>    
+                        <td>${val.namaBelakang}</td>    
+                        <td>
+                            <input type='button' value='Delete' onclick='deleteData(${index})'>    
+                        </td>    
+                        <td>
+                            <input type='button' value='Edit' onclick='editData(${index})'>    
+                        </td>    
+                    </tr>
+                `
+            )
+        })
+        //[
+            // <tr><td>Lian</td></tr>,
+            // <tr><td>Andi</td></tr>,
+            // <tr><td>Susilo</td></tr>
+        //]
+        document.getElementById('hasilTabel').innerHTML = hasilMap.join('')
+    }
+
+    var deleteData = (index) => {
+        // console.log(index)
+        // console.log(bioData[index])
+        bioData.splice(index, 1)
+        console.log(bioData)
+        mapBioData()
+    }
+
+    var editData = (indexData) => {
+        // 0
+        mapBioData(indexData)
+    }
+
+    var saveEdit = (indexData) => {
+        var namaDepan = document.getElementById('editInputDepan').value
+        var namaBelakang = document.getElementById('editInputBelakang').value
+        bioData[indexData] = {
+            namaDepan,
+            namaBelakang
+        }
+        mapBioData()
+    }
+
+    var cancelEdit= () => {
+        mapBioData()
+    }
+
+    mapBioData()
+
+    var onButtonClick = () => {
+        var namaDepan = document.getElementById('namaDepanInput').value;
+        var namaBelakang = document.getElementById('namaBelakangInput').value
+        var obj ={
+            namaDepan : namaDepan,
+            namaBelakang : namaBelakang
+        }      
+        bioData.push(obj)
+        mapBioData()
+    }
+
+    //TAG HTML
+    var onInputChange = () => {
+        var input = document.getElementById('textInput').value;
+        // console.log(document.getElementById('hasil').innerHTML)
+
+        return document.getElementById('hasil').innerHTML = 'lian'
+    }
+
+</script>
+
+</html>
